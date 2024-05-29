@@ -6,11 +6,11 @@ return {
         "folke/todo-comments.nvim",
         event = "VimEnter",
         dependencies = { "nvim-lua/plenary.nvim" },
-        opts = { signs = true }
+        opts = { signs = true },
     },
     {
         "Eandrju/cellular-automaton.nvim",
-        config = function ()
+        config = function()
             vim.keymap.set("n", "<leader>rain", ":CellularAutomaton make_it_rain<CR>")
         end,
     },

@@ -83,9 +83,9 @@ return {
                     -- Fuzzy find all the symbols in your current workspace.
                     --  Similar to document symbols, except searches over your entire project.
                     map(
-                    "<leader>ws",
-                    require("telescope.builtin").lsp_dynamic_workspace_symbols,
-                    "[W]orkspace [S]ymbols"
+                        "<leader>ws",
+                        require("telescope.builtin").lsp_dynamic_workspace_symbols,
+                        "[W]orkspace [S]ymbols"
                     )
 
                     -- Rename the variable under your cursor.
@@ -112,7 +112,7 @@ return {
                     local client = vim.lsp.get_client_by_id(event.data.client_id)
                     if client and client.server_capabilities.documentHighlightProvider then
                         local highlight_augroup =
-                        vim.api.nvim_create_augroup("kickstart-lsp-highlight", { clear = false })
+                            vim.api.nvim_create_augroup("kickstart-lsp-highlight", { clear = false })
                         vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
                             buffer = event.buf,
                             group = highlight_augroup,
@@ -165,7 +165,6 @@ return {
             local servers = {
                 -- clangd = {},
                 -- gopls = {},
-                -- rust_analyzer = {},
                 -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
                 --
                 -- Some languages (like typescript) have entire language plugins that can be useful:
@@ -186,6 +185,17 @@ return {
                             },
                             -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
                             -- diagnostics = { disable = { 'missing-fields' } },
+                        },
+                    },
+                },
+                rust_analyzer = {
+                    filetypes = { "rust" },
+                    root_dir = require("lspconfig.util").root_pattern("Cargo.toml"),
+                    settings = {
+                        ["rust-analyzer"] = {
+                            cargo = {
+                                allFeatures = true,
+                            },
                         },
                     },
                 },
@@ -229,32 +239,19 @@ return {
             highlight = {
                 enable = true,
             },
+            auto_install = true,
+            ensure_installed = {
+                "bash",
+                "c",
+                "python",
+                "diff",
+                "lua",
+                "luadoc",
+                "markdown",
+                "vim",
+                "vimdoc",
+            },
         },
-        -- opts = {
-        --     sync_install = false,
-        --     ensure_installed = {
-        --         "bash",
-        --         "c",
-        --         "python",
-        --         "diff",
-        --         "lua",
-        --         "luadoc",
-        --         "markdown",
-        --         "vim",
-        --         "vimdoc",
-        --     },
-        --     highlight = {
-        --          enable = true,
-        --     },
-        --     auto_install = true,
-        --     indent = {
-        --         enable = true,
-        --         disable = {
-        --             "ruby",
-        --             "python"
-        --         }
-        --     },
-        -- },
         config = function(_, opts)
             -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
             -- Prefer git instead of curl in order to improve connectivity in some environments
