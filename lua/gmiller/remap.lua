@@ -1,3 +1,5 @@
+vim.g.mapleader = " "
+
 vim.keymap.set("n", "<leader>pv", "<cmd>Ex<CR>", { noremap = true, silent = true })
 
 vim.keymap.set("n", "J", "mzJ`z")

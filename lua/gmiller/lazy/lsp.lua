@@ -231,33 +231,4 @@ return {
             })
         end,
     },
-
-    {
-        "nvim-treesitter/nvim-treesitter",
-        build = ":TSUpdate",
-        opts = {
-            highlight = {
-                enable = true,
-            },
-            auto_install = true,
-            ensure_installed = {
-                "bash",
-                "c",
-                "python",
-                "diff",
-                "lua",
-                "luadoc",
-                "markdown",
-                "vim",
-                "vimdoc",
-            },
-        },
-        config = function(_, opts)
-            -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
-            -- Prefer git instead of curl in order to improve connectivity in some environments
-            require("nvim-treesitter.install").prefer_git = true
-            ---@diagnostic disable-next-line: missing-fields
-            require("nvim-treesitter.configs").setup(opts)
-        end,
-    },
 }
